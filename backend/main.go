@@ -28,8 +28,20 @@ func helloHandler(w http.ResponseWriter, r *http.Request) {
 
 func main() {
 	http.HandleFunc("/api/hello", helloHandler)
+
+	// Check if TLS certificates exist to enable HTTPS
+	certFile := "server.crt"
+	keyFile := "server.key"
+	
 	fmt.Println("Backend server starting at :8080")
-	if err := http.ListenAndServe(":8080", nil); err != nil {
-		log.Fatal(err)
+	if err := http.ListenAndServeTLS(":8080", certFile, keyFile, nil); err == nil {
+		// Started successfully with HTTPS
+		return
+	} else {
+		// Fallback to HTTP if certificates are not found or invalid
+		fmt.Printf("Failed to start HTTPS: %v\nFalling back to HTTP on :8080...\n", err)
+		if err := http.ListenAndServe(":8080", nil); err != nil {
+			log.Fatal(err)
+		}
 	}
 }

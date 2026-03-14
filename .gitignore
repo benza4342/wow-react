@@ -89,3 +89,10 @@ backend/bin/
 .env.test.local
 .env.production.local
 *.env*
+
+# TLS certificates
+server.crt
+server.key
+
+# Vercel
+.vercel
