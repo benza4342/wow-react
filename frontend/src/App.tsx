@@ -3,6 +3,7 @@ import './index.css'
 
 function App() {
   const [scrolled, setScrolled] = useState(false)
+  const [apiMessage, setApiMessage] = useState<string>("Loading from backend...")
 
   useEffect(() => {
     const handleScroll = () => {
@@ -10,6 +11,18 @@ function App() {
     }
     window.addEventListener('scroll', handleScroll)
     return () => window.removeEventListener('scroll', handleScroll)
+  }, [])
+
+  useEffect(() => {
+    // 🌐 Automatically switch API endpoint:
+    // If running in development: uses your local secure HTTPS backend
+    // If running in production (Vercel): uses the relative /api/hello path
+    const apiUrl = import.meta.env.DEV ? 'https://localhost:8080/api/hello' : '/api/hello'
+    
+    fetch(apiUrl)
+      .then(res => res.json())
+      .then(data => setApiMessage(data.message))
+      .catch(err => setApiMessage("Failed to fetch: " + err.message))
   }, [])
 
   return (
@@ -62,6 +75,20 @@ function App() {
           <div style={{ display: 'flex', gap: '1rem', justifyContent: 'center' }}>
             <button className="btn-primary" style={{ fontSize: '1.125rem' }}>Launch Aura</button>
             <button className="glass" style={{ color: 'white', padding: '0.8rem 2rem', borderRadius: '9999px', fontWeight: 600, cursor: 'pointer' }}>Watch Demo</button>
+          </div>
+          <div style={{
+            marginTop: '3rem',
+            padding: '1.5rem',
+            background: 'rgba(6, 182, 212, 0.1)',
+            border: '1px solid rgba(6, 182, 212, 0.3)',
+            borderRadius: '16px',
+            display: 'inline-block',
+            backdropFilter: 'blur(10px)'
+          }}>
+            <h3 style={{ fontSize: '1rem', color: 'var(--text-muted)', marginBottom: '0.5rem', textTransform: 'uppercase', letterSpacing: '1px' }}>Backend Response</h3>
+            <p style={{ fontSize: '1.25rem', fontWeight: 600, color: 'white', margin: 0 }}>
+              {apiMessage}
+            </p>
           </div>
         </div>
         
