@@ -17,8 +17,8 @@ function App() {
     // 🌐 Automatically switch API endpoint:
     // If running in development: uses your local secure HTTPS backend
     // If running in production (Vercel): uses the relative /api/hello path
-    const apiUrl = import.meta.env.DEV ? 'https://localhost:8080/api/hello' : '/api/hello'
-    
+    const apiUrl = 'https://wow-react-eight.vercel.app/api/hello'
+
     fetch(apiUrl)
       .then(res => res.json())
       .then(data => setApiMessage(data.message))
@@ -69,7 +69,7 @@ function App() {
             Elevate Your Business<br />With Aura Intelligence
           </h1>
           <p style={{ maxWidth: '600px', margin: '0 auto 3rem', fontSize: '1.25rem' }}>
-            The all-in-one AI platform designed to automate your workflow, 
+            The all-in-one AI platform designed to automate your workflow,
             insightfully analyze data, and scale your operations effortlessly.
           </p>
           <div style={{ display: 'flex', gap: '1rem', justifyContent: 'center' }}>
@@ -91,7 +91,7 @@ function App() {
             </p>
           </div>
         </div>
-        
+
         {/* Background Glows */}
         <div style={{
           position: 'absolute',
@@ -113,7 +113,7 @@ function App() {
             <h2 style={{ fontSize: '3rem', marginBottom: '1rem' }}>Powerful Capabilities</h2>
             <p>Everything you need to build the future of your company.</p>
           </div>
-          
+
           <div className="grid" style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))', gap: '2rem' }}>
             {[
               { title: 'Neural Automation', desc: 'Predictive workflows that adapt to your business needs in real-time.', icon: '🧠' },
