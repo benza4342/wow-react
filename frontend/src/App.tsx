@@ -16,8 +16,8 @@ function App() {
   useEffect(() => {
     // 🌐 Automatically switch API endpoint:
     // If running in development: uses your local secure HTTPS backend
-    // If running in production (Vercel): uses the relative /api/hello path
-    const apiUrl = 'https://wow-react-eight.vercel.app/api/hello'
+    // If running in production: uses the Vercel backend URL
+    const apiUrl = import.meta.env.DEV ? 'https://localhost:8080/api/hello' : 'https://wow-react-eight.vercel.app/api/hello'
 
     fetch(apiUrl)
       .then(res => res.json())
