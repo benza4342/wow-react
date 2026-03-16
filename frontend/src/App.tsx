@@ -1,22 +1,24 @@
 import { useState, useEffect } from 'react'
-import './index.css'
+import { 
+  Box, 
+  Container, 
+  Heading, 
+  Text, 
+  Button, 
+  Stack, 
+  SimpleGrid, 
+  Flex, 
+  Link,
+  Circle,
+  VStack,
+  HStack
+} from '@chakra-ui/react'
+import { ColorModeButton } from './components/ui/color-mode'
 
 function App() {
-  const [scrolled, setScrolled] = useState(false)
   const [apiMessage, setApiMessage] = useState<string>("Loading from backend...")
 
   useEffect(() => {
-    const handleScroll = () => {
-      setScrolled(window.scrollY > 50)
-    }
-    window.addEventListener('scroll', handleScroll)
-    return () => window.removeEventListener('scroll', handleScroll)
-  }, [])
-
-  useEffect(() => {
-    // 🌐 Automatically switch API endpoint:
-    // If running in development: uses your local secure HTTPS backend
-    // If running in production: uses the Vercel backend URL
     const apiUrl = import.meta.env.DEV ? 'https://localhost:8080/api/hello' : 'https://wow-react-eight.vercel.app/api/hello'
 
     fetch(apiUrl)
@@ -26,177 +28,165 @@ function App() {
   }, [])
 
   return (
-    <div className="aura-landing">
-      {/* Navbar */}
-      <nav className={`glass ${scrolled ? 'nav-scrolled' : ''}`} style={{
-        position: 'fixed',
-        top: 0,
-        width: '100%',
-        zIndex: 1000,
-        padding: '1rem 0',
-        transition: 'all 0.3s ease'
-      }}>
-        <div className="container" style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
-          <div className="logo" style={{ fontSize: '1.5rem', fontWeight: 800, letterSpacing: '-1px' }}>
-            AURA<span className="gradient-text">AI</span>
-          </div>
-          <div className="nav-links" style={{ display: 'flex', gap: '2rem', fontWeight: 500 }}>
-            <a href="#features">Features</a>
-            <a href="#about">About</a>
-            <a href="#pricing">Pricing</a>
-          </div>
-          <button className="btn-primary" style={{ padding: '0.6rem 1.5rem' }}>Get Started</button>
-        </div>
-      </nav>
+    <Box minH="100vh" bg="bg.canvas" color="fg">
+      {/* Navigation */}
+      <Box 
+        as="nav" 
+        position="fixed" 
+        w="full" 
+        zIndex="sticky" 
+        bg="bg.panel/80" 
+        backdropFilter="blur(10px)" 
+        borderBottomWidth="1px"
+        py="4"
+      >
+        <Container maxW="container.xl">
+          <Flex justify="space-between" align="center">
+            <Heading size="md" fontWeight="black" letterSpacing="tighter">
+              CHAKRA<Text as="span" color="blue.500">V3</Text>
+            </Heading>
+            <HStack spaceX="8" display={{ base: 'none', md: 'flex' }}>
+              <Link href="#features" fontWeight="medium">Features</Link>
+              <Link href="#about" fontWeight="medium">About</Link>
+              <Link href="#pricing" fontWeight="medium">Pricing</Link>
+            </HStack>
+            <HStack spaceX="4">
+              <ColorModeButton />
+              <Button colorScheme="blue" rounded="full" px="6" display={{ base: 'none', sm: 'flex' }}>
+                Get Started
+              </Button>
+            </HStack>
+          </Flex>
+        </Container>
+      </Box>
 
       {/* Hero Section */}
-      <header className="section-padding" style={{ position: 'relative', overflow: 'hidden', textAlign: 'center' }}>
-        <div className="container" style={{ paddingTop: '4rem' }}>
-          <div className="pill" style={{
-            display: 'inline-block',
-            padding: '0.5rem 1rem',
-            borderRadius: '999px',
-            background: 'rgba(139, 92, 246, 0.1)',
-            border: '1px solid rgba(139, 92, 246, 0.2)',
-            color: 'var(--primary)',
-            fontSize: '0.875rem',
-            fontWeight: 600,
-            marginBottom: '2rem'
-          }}>
-            ✨ Next Generation AI Platform
-          </div>
-          <h1 className="gradient-text" style={{ fontSize: 'clamp(3rem, 8vw, 6rem)', marginBottom: '1.5rem' }}>
-            Elevate Your Business<br />With Aura Intelligence
-          </h1>
-          <p style={{ maxWidth: '600px', margin: '0 auto 3rem', fontSize: '1.25rem' }}>
-            The all-in-one AI platform designed to automate your workflow,
-            insightfully analyze data, and scale your operations effortlessly.
-          </p>
-          <div style={{ display: 'flex', gap: '1rem', justifyContent: 'center' }}>
-            <button className="btn-primary" style={{ fontSize: '1.125rem' }}>Launch Aura</button>
-            <button className="glass" style={{ color: 'white', padding: '0.8rem 2rem', borderRadius: '9999px', fontWeight: 600, cursor: 'pointer' }}>Watch Demo</button>
-          </div>
-          <div style={{
-            marginTop: '3rem',
-            padding: '1.5rem',
-            background: 'rgba(6, 182, 212, 0.1)',
-            border: '1px solid rgba(6, 182, 212, 0.3)',
-            borderRadius: '16px',
-            display: 'inline-block',
-            backdropFilter: 'blur(10px)'
-          }}>
-            <h3 style={{ fontSize: '1rem', color: 'var(--text-muted)', marginBottom: '0.5rem', textTransform: 'uppercase', letterSpacing: '1px' }}>Backend Response</h3>
-            <p style={{ fontSize: '1.25rem', fontWeight: 600, color: 'white', margin: 0 }}>
-              {apiMessage}
-            </p>
-          </div>
-        </div>
+      <Box pt="32" pb="20" position="relative" overflow="hidden">
+        <Container maxW="container.lg" textAlign="center">
+          <Stack spaceY="8" align="center">
+            <Box 
+              px="4" 
+              py="1" 
+              rounded="full" 
+              bg="blue.500/10" 
+              borderWidth="1px" 
+              borderColor="blue.500/20"
+              color="blue.500"
+              fontSize="sm"
+              fontWeight="bold"
+            >
+              ✨ Now Powered by Chakra UI v3
+            </Box>
+            <Heading size="4xl" fontWeight="extrabold" letterSpacing="tight" lineHeight="shorter">
+              Build Beautiful Apps <br />
+              <Text as="span" bgGradient="to-r" gradientFrom="blue.400" gradientTo="purple.500" bgClip="text">
+                Faster Than Ever
+              </Text>
+            </Heading>
+            <Text fontSize="xl" color="fg.muted" maxW="2xl">
+              Chakra UI provides a set of accessible, reusable, and composable React components that make it easy to create websites and apps.
+            </Text>
+            <HStack spaceX="4">
+              <Button size="lg" colorScheme="blue" rounded="full" px="8">
+                Get Started
+              </Button>
+              <Button size="lg" variant="outline" rounded="full" px="8">
+                View Documentation
+              </Button>
+            </HStack>
 
-        {/* Background Glows */}
-        <div style={{
-          position: 'absolute',
-          top: '20%',
-          left: '50%',
-          transform: 'translateX(-50%)',
-          width: '800px',
-          height: '400px',
-          background: 'radial-gradient(circle, rgba(139, 92, 246, 0.2) 0%, transparent 70%)',
-          filter: 'blur(60px)',
-          zIndex: -1
-        }}></div>
-      </header>
+            {/* Backend Response Badge */}
+            <Box 
+              mt="10" 
+              p="6" 
+              bg="bg.panel" 
+              rounded="2xl" 
+              shadow="xl" 
+              borderWidth="1px"
+              maxW="md"
+              w="full"
+            >
+              <Text fontSize="xs" fontWeight="bold" color="fg.muted" textTransform="uppercase" mb="2">
+                Backend Status
+              </Text>
+              <Text fontSize="lg" fontWeight="semibold">
+                {apiMessage}
+              </Text>
+            </Box>
+          </Stack>
+        </Container>
 
-      {/* Features Section */}
-      <section id="features" className="section-padding" style={{ background: 'var(--bg-dark)' }}>
-        <div className="container">
-          <div style={{ textAlign: 'center', marginBottom: '5rem' }}>
-            <h2 style={{ fontSize: '3rem', marginBottom: '1rem' }}>Powerful Capabilities</h2>
-            <p>Everything you need to build the future of your company.</p>
-          </div>
+        {/* Decorative Background */}
+        <Box 
+          position="absolute" 
+          top="-10%" 
+          left="50%" 
+          transform="translateX(-50%)" 
+          w="1000px" 
+          h="500px" 
+          bgGradient="radial(blue.500/10, transparent 70%)" 
+          filter="blur(80px)" 
+          zIndex="-1"
+        />
+      </Box>
 
-          <div className="grid" style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))', gap: '2rem' }}>
-            {[
-              { title: 'Neural Automation', desc: 'Predictive workflows that adapt to your business needs in real-time.', icon: '🧠' },
-              { title: 'Data Synthesis', desc: 'Transform raw data into actionable insights with elite AI models.', icon: '📊' },
-              { title: 'Security First', desc: 'Enterprise-grade encryption and privacy controls at every layer.', icon: '🛡️' }
-            ].map((f, i) => (
-              <div key={i} className="glass" style={{ padding: '3rem', borderRadius: '24px', transition: 'transform 0.3s ease' }}>
-                <div style={{ fontSize: '3rem', marginBottom: '1.5rem' }}>{f.icon}</div>
-                <h3 style={{ marginBottom: '1rem' }}>{f.title}</h3>
-                <p>{f.desc}</p>
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
+      {/* Features Grid */}
+      <Box bg="bg.muted" py="20" id="features">
+        <Container maxW="container.xl">
+          <VStack spaceY="12">
+            <VStack spaceY="4" textAlign="center">
+              <Heading size="2xl">Everything You Need</Heading>
+              <Text fontSize="lg" color="fg.muted">
+                Dozens of hand-crafted components to build your next big idea.
+              </Text>
+            </VStack>
 
-      {/* Stats Section */}
-      <section className="section-padding">
-        <div className="container">
-          <div style={{ display: 'flex', flexWrap: 'wrap', justifyContent: 'space-around', gap: '4rem', textAlign: 'center' }}>
-            {[
-              { val: '99.9%', label: 'Uptime' },
-              { val: '250M+', label: 'Requests/Day' },
-              { val: '15k+', label: 'Enterprises' }
-            ].map((s, i) => (
-              <div key={i}>
-                <div className="gradient-text" style={{ fontSize: '4rem', fontWeight: 800 }}>{s.val}</div>
-                <div style={{ fontWeight: 600, textTransform: 'uppercase', letterSpacing: '2px', marginTop: '0.5rem' }}>{s.label}</div>
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* CTA Section */}
-      <section className="section-padding">
-        <div className="container">
-          <div className="glass" style={{
-            padding: '5rem',
-            borderRadius: '40px',
-            textAlign: 'center',
-            position: 'relative',
-            overflow: 'hidden',
-            background: 'linear-gradient(135deg, rgba(139, 92, 246, 0.1), rgba(6, 182, 212, 0.1))'
-          }}>
-            <h2 style={{ fontSize: '3.5rem', marginBottom: '1.5rem' }}>Ready to start with Aura?</h2>
-            <p style={{ maxWidth: '600px', margin: '0 auto 3rem', fontSize: '1.25rem' }}>
-              Join thousands of teams already scaling with our intelligence platform.
-            </p>
-            <button className="btn-primary" style={{ fontSize: '1.25rem', padding: '1rem 3rem' }}>Get Started for Free</button>
-          </div>
-        </div>
-      </section>
+            <SimpleGrid columns={{ base: 1, md: 3 }} spaceX="8" spaceY="8" w="full">
+              {[
+                { title: 'Responsive', icon: '📱', desc: 'Optimized for all screen sizes from mobile to desktop.' },
+                { title: 'Themeable', icon: '🎨', desc: 'Fully customizable design system with built-in dark mode.' },
+                { title: 'Accessible', icon: '♿', desc: 'WAI-ARIA compliant components for a better user experience.' }
+              ].map((feature, i) => (
+                <Box 
+                  key={i} 
+                  p="8" 
+                  bg="bg.panel" 
+                  rounded="3xl" 
+                  shadow="sm" 
+                  borderWidth="1px"
+                  transition="all 0.3s"
+                  _hover={{ transform: 'translateY(-8px)', shadow: 'md', borderColor: 'blue.500' }}
+                >
+                  <Circle size="12" bg="blue.500/10" mb="6" fontSize="2xl">
+                    {feature.icon}
+                  </Circle>
+                  <Heading size="lg" mb="4">{feature.title}</Heading>
+                  <Text color="fg.muted">{feature.desc}</Text>
+                </Box>
+              ))}
+            </SimpleGrid>
+          </VStack>
+        </Container>
+      </Box>
 
       {/* Footer */}
-      <footer style={{ padding: '4rem 0', borderTop: '1px solid var(--glass-border)' }}>
-        <div className="container" style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', flexWrap: 'wrap', gap: '2rem' }}>
-          <div className="logo" style={{ fontSize: '1.25rem', fontWeight: 800 }}>
-            AURA<span className="gradient-text">AI</span>
-          </div>
-          <div style={{ display: 'flex', gap: '2rem' }}>
-            <a href="#">Privacy</a>
-            <a href="#">Terms</a>
-            <a href="#">Careers</a>
-          </div>
-          <div style={{ color: 'var(--text-muted)' }}>
-            © {new Date().getFullYear()} Aura AI. All rights reserved.
-          </div>
-        </div>
-      </footer>
-
-      <style>{`
-        .nav-scrolled {
-          background: rgba(5, 7, 10, 0.8) !important;
-          padding: 0.8rem 0 !important;
-          box-shadow: 0 10px 30px rgba(0,0,0,0.5);
-        }
-        .grid > div:hover {
-          transform: translateY(-10px);
-          border-color: var(--primary);
-        }
-      `}</style>
-    </div>
+      <Box py="10" borderTopWidth="1px">
+        <Container maxW="container.xl">
+          <Flex direction={{ base: 'column', md: 'row' }} justify="space-between" align="center" gap="6">
+            <Heading size="sm" fontWeight="black">
+              CHAKRA<Text as="span" color="blue.500">V3</Text>
+            </Heading>
+            <Text color="fg.muted" fontSize="sm">
+              © {new Date().getFullYear()} Chakra V3 Demo. Built with speed and love.
+            </Text>
+            <HStack spaceX="6">
+              <Link color="fg.muted" _hover={{ color: 'blue.500' }}>Twitter</Link>
+              <Link color="fg.muted" _hover={{ color: 'blue.500' }}>GitHub</Link>
+            </HStack>
+          </Flex>
+        </Container>
+      </Box>
+    </Box>
   )
 }
 
