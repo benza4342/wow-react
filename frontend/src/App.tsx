@@ -1,13 +1,13 @@
 import { useState, useEffect } from 'react'
-import { 
-  Box, 
-  Container, 
-  Heading, 
-  Text, 
-  Button, 
-  Stack, 
-  SimpleGrid, 
-  Flex, 
+import {
+  Box,
+  Container,
+  Heading,
+  Text,
+  Button,
+  Stack,
+  SimpleGrid,
+  Flex,
   Link,
   Circle,
   VStack,
@@ -30,13 +30,13 @@ function App() {
   return (
     <Box minH="100vh" bg="bg.canvas" color="fg">
       {/* Navigation */}
-      <Box 
-        as="nav" 
-        position="fixed" 
-        w="full" 
-        zIndex="sticky" 
-        bg="bg.panel/80" 
-        backdropFilter="blur(10px)" 
+      <Box
+        as="nav"
+        position="fixed"
+        w="full"
+        zIndex="sticky"
+        bg="bg.panel/80"
+        backdropFilter="blur(10px)"
         borderBottomWidth="1px"
         py="4"
       >
@@ -64,12 +64,12 @@ function App() {
       <Box pt="32" pb="20" position="relative" overflow="hidden">
         <Container maxW="container.lg" textAlign="center">
           <Stack spaceY="8" align="center">
-            <Box 
-              px="4" 
-              py="1" 
-              rounded="full" 
-              bg="blue.500/10" 
-              borderWidth="1px" 
+            <Box
+              px="4"
+              py="1"
+              rounded="full"
+              bg="blue.500/10"
+              borderWidth="1px"
               borderColor="blue.500/20"
               color="blue.500"
               fontSize="sm"
@@ -96,12 +96,12 @@ function App() {
             </HStack>
 
             {/* Backend Response Badge */}
-            <Box 
-              mt="10" 
-              p="6" 
-              bg="bg.panel" 
-              rounded="2xl" 
-              shadow="xl" 
+            <Box
+              mt="10"
+              p="6"
+              bg="bg.panel"
+              rounded="2xl"
+              shadow="xl"
               borderWidth="1px"
               maxW="md"
               w="full"
@@ -117,15 +117,15 @@ function App() {
         </Container>
 
         {/* Decorative Background */}
-        <Box 
-          position="absolute" 
-          top="-10%" 
-          left="50%" 
-          transform="translateX(-50%)" 
-          w="1000px" 
-          h="500px" 
-          bgGradient="radial(blue.500/10, transparent 70%)" 
-          filter="blur(80px)" 
+        <Box
+          position="absolute"
+          top="-10%"
+          left="50%"
+          transform="translateX(-50%)"
+          w="1000px"
+          h="500px"
+          bgGradient="radial(blue.500/10, transparent 70%)"
+          filter="blur(80px)"
           zIndex="-1"
         />
       </Box>
@@ -147,12 +147,12 @@ function App() {
                 { title: 'Themeable', icon: '🎨', desc: 'Fully customizable design system with built-in dark mode.' },
                 { title: 'Accessible', icon: '♿', desc: 'WAI-ARIA compliant components for a better user experience.' }
               ].map((feature, i) => (
-                <Box 
-                  key={i} 
-                  p="8" 
-                  bg="bg.panel" 
-                  rounded="3xl" 
-                  shadow="sm" 
+                <Box
+                  key={i}
+                  p="8"
+                  bg="bg.panel"
+                  rounded="3xl"
+                  shadow="sm"
                   borderWidth="1px"
                   transition="all 0.3s"
                   _hover={{ transform: 'translateY(-8px)', shadow: 'md', borderColor: 'blue.500' }}
